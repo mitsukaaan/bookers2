@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    
+   <header>
+      <nav class ="navbar navbar-expand-lg navbar-dark  bg-dark">
+       <div class="container">
+        <a class="navbar-brand" href="/"><span>Bookers</span></a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+           <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+          
+           <li class="nav-item">
+              <%= link_to user_path(current_user) do %>
+              <div class="text-white mr-5"><i class="fas fa-home"></i>Home</div>
+              <% end %>
+           </li>
+           
+           <li class="nav-item">
+              <%= link_to users_path do %>
+              <div class="text-white"><i class="fas fa-users"></i>Users</div>
+              <% end %>
+           </li>
+           
+           <li class="nav-item">
+             <%= link_to books_path do %>
+             <div class="text-white mx-5"><i class="fas fa-book-open"></i>Books</div>
+             <% end %>
+           </li>
+           
+           <li class="nav-item">
+             <%= link_to destroy_user_session_path,method: :delete do %>
+             <div class="text-whitemx-5"><i class="fas fa-sign-out-alt"></i>Log out</div>
+             <% end %>
+           </li>
+           </ul>
+           
+           <% else %>
+           
+           <ul class="navbar-nav ml-auto">
+             
+            <li class="nav-item">
+              <%= link_to root_path do %>
+              <div class="text-white"><i class="fas fa-home"></i>Home</div>
+              <% end %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to home_about_path do %>
+              <div class="text-white mx-5"><i class="fas fa-link"></i>About</div>
+              <% end %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to new_user_registration_path do %>
+              <div class="text-white"><i class="fas fa-user-plus"></i>Sign up</div>
+              <% end %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to user_session_path do %>
+              <div class="text-white mx-5"><i class="fas fa-sign-in-alt"></i>Log in</div>
+              <% end %>
+            </li>
+           </ul>
+              <% end %>
+           </div>
+          </div>
+      </nav>
+    </header>
+    
+    
+     <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class:"#{key} text-success" ) %>
+  <% end %>
+    <%= yield %>
+    </body>
+  <div class="fixed-bottom">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="mx-auto">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
